@@ -29,9 +29,6 @@ class BankAccount:
 
 
 
-# Usage example
-user_account = BankAccount('123456789', 500, '123', 'password123')
-recipient_account = BankAccount('987654321', 1000, '456', 'securepwd')
 
-recharge_amount = 200
-recharge_wallet(user_account, user_account, recharge_amount)
+
+
