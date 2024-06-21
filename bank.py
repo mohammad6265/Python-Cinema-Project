@@ -26,14 +26,7 @@ class BankAccount:
             print('Insufficient balance for transfer.')
 
 
-# User recharging wallet by selecting a bank account
 
-def recharge_wallet(user, bank_account, amount):
-    if bank_account.cvv2 == user.cvv2 and bank_account.password == user.password:
-        bank_account.deposit(amount)
-        print('Wallet recharged successfully.')
-    else:
-        print('CVV2 or password incorrect. Wallet recharge failed.')
 
 
 # Usage example
