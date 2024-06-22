@@ -1,7 +1,7 @@
 from user import User
 
 
-def home():
+def home(view_profile=None):
     user = None
 
     while True:
@@ -30,6 +30,8 @@ def home():
 
                 if choice_logged_in == "1":
                     print(user)
+                    print(view_profile)
+                    
                 elif choice_logged_in == "2":
                     user.edit_info()
                 elif choice_logged_in == "3":

@@ -1,4 +1,5 @@
 from datetime import datetime
+from movie import Movie
 import uuid
 import hashlib
 import getpass
@@ -14,6 +15,7 @@ class User:
         self._password = password
         self.birthday = datetime.strptime(birthday, "%Y-%m-%d").date()
         self.phone_number = phone_number
+        self.age = datetime.now() - self.birthday
         self._id = str(uuid.uuid4())
         self.registration_date = datetime.now()
 
@@ -81,6 +83,12 @@ class User:
             print("Invalid username or password.")
             return False
 
+    @property
+    def view_profile(self):
+        for user in self.users:
+            if user.username == self.username:
+                return user.profile
+
     def __str__(self) -> str:
         return (f"Username: {self.username}\nPhone Number: {self.phone_number}\n "
                 f" Register on: {self.registration_date}")
@@ -113,4 +121,43 @@ class User:
             self._password = self._hash_password(new_password)
             print("Password updated successfully.")
 
+    @staticmethod
+    def Birthday_discount(self=None):
+        # Get the current date
+        current_data = datetime.now().date()
+        """از طریق کاربران تکرار کنید و بررسی کنید که آیا تاریخ تولد 
+        آنها با تاریخ فعلی مطابقت دارد یا خیر"""
+        """# Iterate through the users and check 
+        if their birthdate matches the current date"""
+        for user in User.users:
+            if user.birthday == current_data:
+                """#Apply the discount to the user"""
+                """تخفیف را برای کاربر اعمال کنید"""
+            print(f"Happy birthday : {self.username}!! you get a"
+                  f" 50% discount on your next ticket purchase. ")
 
+    def apply_discount(self):
+        """Users can get discounts for the number of months they are members"""
+        """کاربران به تعداد ماه هایی که عضو هستند میتوانند تخفیف بگیرن"""
+        current_date = datetime.now()
+        registration_delta = current_date - self.registration_date
+        months_as_member = registration_delta.days // 30
+        # Apply a maximum 60% discount
+        # حداکثر 60 درصد تخفیف اعمال می شود
+        discount_percentage = min(months_as_member, 12) * 5
+        return discount_percentage
+
+    def is_eligible_for_discount(self):
+        """کاربران مجاز به رزرو یا مشاهده فیلمهایی که
+         برای رده های سنی بالاتر از او میباشند مجاز نخواهد بود
+        """
+        # Authorized users will not be allowed to reserve
+        # or watch movies that are for older age groups
+        if self.age >= 18:
+            return True
+        else:
+            return False
+
+    def watch_movie(self, movie):
+        if movie.age_rating > self.age:
+            raise Exception("You are not eligible to watch this movie")

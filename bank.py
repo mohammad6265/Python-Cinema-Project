@@ -26,9 +26,5 @@ class BankAccount:
             print('Insufficient balance for transfer.')
 
 
-
-
-
-
-
-
+b1 = BankAccount("123", "3000", "622", "62659393")
+print(b1.account_number)
