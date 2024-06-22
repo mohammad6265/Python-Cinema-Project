@@ -10,9 +10,16 @@ class ShowTime:
         self.booked_seats = 0
 
     def is_available(self):
-        return self.booked_seats < self.capacity
+        if self.booked_seats < self.capacity:
+            return True
+        else:
+            return False
 
 
 # Set up showtimes
 s1 = ShowTime("movie1", "2000-01-01 14:00", 10)
 print(s1.capacity)
+print(s1.is_available())
+
+
+
